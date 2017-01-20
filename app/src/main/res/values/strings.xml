@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Pie Plate</string>
+    <string name="picture_button_text">Take a Picture!</string>
 </resources>
