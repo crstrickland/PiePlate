@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageView;
     private Uri file;
 
+    private String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
     static final int PERMISSION_REQUEST_CODE = 0;
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             takePictureButton.setEnabled(false);
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+            ActivityCompat.requestPermissions(this, permissions, PERMISSION_REQUEST_CODE);
         }
     }
 
@@ -56,12 +58,12 @@ public class MainActivity extends AppCompatActivity {
         file = Uri.fromFile(getOutputMediaFile());
         intent.putExtra(MediaStore.EXTRA_OUTPUT, file);
 
-        startActivityForResult(intent, PERMISSION_REQUEST_CODE);
+        startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(requestCode == PERMISSION_REQUEST_CODE){
+        if(requestCode == REQUEST_IMAGE_CAPTURE){
             if(resultCode == RESULT_OK) {
                 imageView.setImageURI(file);
             }
@@ -79,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         return new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
-
 
     }
 
