@@ -1,7 +1,9 @@
 package cooper.pieplate;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.net.Uri;
@@ -11,7 +13,6 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -24,10 +25,9 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     private Button takePictureButton;
-    private ImageView imageView;
     private SurfaceView preview;
     private SurfaceHolder previewHolder;
     private boolean inPreview;
@@ -48,11 +48,12 @@ public class MainActivity extends AppCompatActivity {
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+
 
         setContentView(R.layout.activity_main);
 
         takePictureButton = (Button) findViewById(R.id.button_image);
-        imageView = (ImageView) findViewById(R.id.imageview);
         preview = (SurfaceView) findViewById(R.id.camera_preview);
 
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -153,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode == REQUEST_IMAGE_CAPTURE){
             if(resultCode == RESULT_OK) {
-                imageView.setImageURI(file);
+                return ;
             }
         }
     }
