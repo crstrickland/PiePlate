@@ -10,6 +10,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="cooper.pieplate.MainActivity">
 
+    <SurfaceView
+        android:id="@+id/camera_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <Button
         android:id="@+id/button_image"
         android:layout_width="wrap_content"
@@ -18,10 +23,5 @@
         android:text="@string/picture_button_text"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true" />
-
-    <SurfaceView
-        android:id="@+id/camera_preview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
 </RelativeLayout>

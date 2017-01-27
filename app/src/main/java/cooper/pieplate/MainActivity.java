@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+        //this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
 
 
         setContentView(R.layout.activity_main);
@@ -153,8 +153,9 @@ public class MainActivity extends Activity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode == REQUEST_IMAGE_CAPTURE){
-            if(resultCode == RESULT_OK) {
-                return ;
+            if(resultCode == RESULT_OK){
+                Intent rev = new Intent(this, Review.class);
+                rev.putExtra("board", file);
             }
         }
     }
